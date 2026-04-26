@@ -118,19 +118,22 @@ export function SiteHeader() {
               </Link>
             </div>
 
-            <button
-              type="button"
-              className="lg:hidden p-2 -mr-2"
-              onClick={() => setMobileOpen((v) => !v)}
-              aria-label={t.nav.ouvrirMenu}
-              aria-controls={mobileMenuId}
-            >
-              {mobileOpen ? (
-                <X className="size-6" strokeWidth={1.5} />
-              ) : (
-                <Menu className="size-6" strokeWidth={1.5} />
-              )}
-            </button>
+            <div className="lg:hidden flex items-center gap-2">
+              <LanguageSwitcher />
+              <button
+                type="button"
+                className="p-2 -mr-2"
+                onClick={() => setMobileOpen((v) => !v)}
+                aria-label={t.nav.ouvrirMenu}
+                aria-controls={mobileMenuId}
+              >
+                {mobileOpen ? (
+                  <X className="size-6" strokeWidth={1.5} />
+                ) : (
+                  <Menu className="size-6" strokeWidth={1.5} />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -209,10 +212,12 @@ export function SiteHeader() {
               </a>
             </div>
 
-            <div className="mt-10 pt-6 border-t border-ink/10 font-mono text-xs text-ink-muted space-y-2 pb-24">
-              <p>{company.coords} · Ndjili, Kinshasa</p>
-              <p>{company.email}</p>
-              <p>RCCM {company.rccm}</p>
+            <div className="mt-10 pt-6 border-t border-ink/10 pb-24 flex items-start justify-between">
+              <div className="font-mono text-xs text-ink-muted space-y-2">
+                <p>{company.coords} · Ndjili, Kinshasa</p>
+                <p>{company.email}</p>
+                <p>RCCM {company.rccm}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -82,11 +82,11 @@ export function ServicePillars() {
                 </div>
 
                 <h3 className="mt-8 font-display text-2xl md:text-[26px] leading-[1.05] tracking-tight text-pretty">
-                  {s.title}
+                  {t.serviceCards.find(c => c.code === s.code)?.title ?? s.title}
                 </h3>
 
                 <p className="mt-4 text-sm text-ink-muted leading-relaxed flex-1">
-                  {s.blurb}
+                  {t.serviceCards.find(c => c.code === s.code)?.blurb ?? s.blurb}
                 </p>
 
                 <span className="mt-5 font-mono-label text-bordeaux-700 opacity-0 transition-opacity group-hover:opacity-100">
