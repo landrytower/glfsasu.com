@@ -15,6 +15,7 @@ export function ServicePillars() {
   const t = useT().servicePillars;
 
   const [services, setServices] = useState(staticServices);
+  const [isFirebaseData, setIsFirebaseData] = useState(false);
   const [sectionText, setSectionText] = useState<{
     headlineEm?: string;
     headlineSuffix?: string;
@@ -24,7 +25,10 @@ export function ServicePillars() {
   useEffect(() => {
     getServices()
       .then((docs) => {
-        if (docs.length > 0) setServices(docs);
+        if (docs.length > 0) {
+          setServices(docs);
+          setIsFirebaseData(true);
+        }
       })
       .catch(() => {});
     getSetting("servicesPillars")
@@ -82,11 +86,11 @@ export function ServicePillars() {
                 </div>
 
                 <h3 className="mt-8 font-display text-2xl md:text-[26px] leading-[1.05] tracking-tight text-pretty">
-                  {t.serviceCards.find(c => c.code === s.code)?.title ?? s.title}
+                  {isFirebaseData ? s.title : (t.serviceCards.find(c => c.code === s.code)?.title ?? s.title)}
                 </h3>
 
                 <p className="mt-4 text-sm text-ink-muted leading-relaxed flex-1">
-                  {t.serviceCards.find(c => c.code === s.code)?.blurb ?? s.blurb}
+                  {isFirebaseData ? s.blurb : (t.serviceCards.find(c => c.code === s.code)?.blurb ?? s.blurb)}
                 </p>
 
                 <span className="mt-5 font-mono-label text-bordeaux-700 opacity-0 transition-opacity group-hover:opacity-100">
