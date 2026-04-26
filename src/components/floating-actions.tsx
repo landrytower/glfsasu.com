@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Phone, X } from "lucide-react";
+import { Phone, X, Settings } from "lucide-react";
+import Link from "next/link";
 import { company } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
@@ -17,6 +18,7 @@ export function FloatingActions() {
   }, []);
 
   return (
+    <>
     <div
       className={cn(
         "fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 transition-all duration-500",
@@ -83,5 +85,15 @@ export function FloatingActions() {
         )}
       </button>
     </div>
+
+    {/* Admin gear — bottom-left, always visible */}
+    <Link
+      href="/espace-client"
+      aria-label="Accès administration"
+      className="fixed bottom-6 left-6 z-50 size-8 flex items-center justify-center text-ink/20 hover:text-ink/50 transition-colors"
+    >
+      <Settings className="size-4" strokeWidth={1.5} />
+    </Link>
+  </>
   );
 }
