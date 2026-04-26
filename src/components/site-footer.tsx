@@ -138,6 +138,22 @@ export function SiteFooter() {
             ))}
           </ul>
         </div>
+
+        {/* Builder credit */}
+        <div className="py-5 border-t border-paper-50/10 flex justify-center">
+          <a
+            href="https://buildbyland.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 text-xs text-paper-50/45 hover:text-paper-50 transition-colors duration-300"
+          >
+            Website built by{" "}
+            <span className="relative inline-flex items-center gap-1 font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] group-hover:drop-shadow-[0_0_14px_rgba(251,191,36,0.9)] transition-all duration-300 animate-[shimmer_3s_linear_infinite] bg-[length:200%_100%]">
+              Landry Palata
+              <ArrowUpRight className="size-3 text-amber-300 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </span>
+          </a>
+        </div>
       </div>
 
       {/* Oversize tagline — archival watermark */}
