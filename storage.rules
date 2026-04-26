@@ -1,0 +1,32 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null
+             && request.auth.token.email == "bobiyatch@gmail.com";
+    }
+
+    // Public read for all uploaded images; admin write
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin()
+                   && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // Quote attachments: anyone authenticated can upload (with size limit), admin reads
+    match /quote-attachments/{quoteId}/{fileName} {
+      allow create: if request.auth != null
+                    && request.resource.size < 20 * 1024 * 1024;
+      allow read: if isAdmin();
+    }
+
+    // Realization images: admin write, public read
+    match /realizations/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin()
+                   && request.resource.size < 10 * 1024 * 1024;
+    }
+  }
+}

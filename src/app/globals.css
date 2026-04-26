@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@theme {
+  /* ────────────────────────────────────────────────────────────────
+     Palette — "Engineered Institution"
+     Paper background, navy ink, strategic bordeaux & green.
+     Deliberately warm; never pure white.
+     ──────────────────────────────────────────────────────────────── */
+  --color-paper-50: #faf7ef;
+  --color-paper-100: #f5f1e8;
+  --color-paper-200: #ebe4d1;
+  --color-paper-300: #d8cdb2;
+
+  --color-ink: #0f1922;
+  --color-ink-muted: #3a4653;
+  --color-ink-faint: #6c7784;
+
+  --color-navy-50: #e6ecf3;
+  --color-navy-100: #c0ccdd;
+  --color-navy-300: #6b8bad;
+  --color-navy-500: #2f5c87;
+  --color-navy-700: #143a5e;
+  --color-navy-800: #0e2e4b;
+  --color-navy-900: #0a2540;
+  --color-navy-950: #051630;
+
+  --color-green-50: #f0f7f2;
+  --color-green-100: #e0efe4;
+  --color-green-300: #95c2a3;
+  --color-green-500: #4ca16d;
+  --color-green-600: #2f8f50;
+  --color-green-700: #1f7a3e;
+  --color-green-800: #135a2e;
+
+  --color-bordeaux-50: #f7e9ec;
+  --color-bordeaux-100: #eed4da;
+  --color-bordeaux-500: #a8334a;
+  --color-bordeaux-700: #7a1e2f;
+  --color-bordeaux-800: #5f1526;
+  --color-bordeaux-900: #43101c;
+
+  /* Typography — distinctive, institutional */
+  --font-sans: var(--font-plex), "Helvetica Neue", -apple-system, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), "Times New Roman", Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Containers */
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --grid-line: color-mix(in oklab, var(--color-ink) 6%, transparent);
+    --grid-line-strong: color-mix(in oklab, var(--color-ink) 12%, transparent);
+    --grid-line-dark: color-mix(in oklab, var(--color-paper-50) 10%, transparent);
+  }
+
+  * {
+    border-color: color-mix(in oklab, var(--color-ink) 10%, transparent);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--color-paper-100);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv11", "cv10";
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background-color: var(--color-bordeaux-700);
+    color: var(--color-paper-50);
+  }
+
+  [dir="rtl"] {
+    font-feature-settings: normal;
+  }
+
+  /* Focus ring — bordeaux for brand presence */
+  :focus-visible {
+    outline: 2px solid var(--color-bordeaux-700);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+
+  .font-mono-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .rule {
+    height: 1px;
+    background: color-mix(in oklab, var(--color-ink) 18%, transparent);
+  }
+
+  .rule-on-dark {
+    height: 1px;
+    background: color-mix(in oklab, var(--color-paper-50) 20%, transparent);
+  }
+
+  /* Vertical grid lines — visible structural element */
+  .grid-lines-paper {
+    background-image: linear-gradient(
+      to right,
+      var(--grid-line) 1px,
+      transparent 1px
+    );
+    background-size: calc(100% / 12) 100%;
+    background-repeat: repeat-y;
+  }
+
+  .grid-lines-dark {
+    background-image: linear-gradient(
+      to right,
+      var(--grid-line-dark) 1px,
+      transparent 1px
+    );
+    background-size: calc(100% / 12) 100%;
+    background-repeat: repeat-y;
+  }
+
+  /* Subtle noise overlay for dark surfaces */
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.12;
+  }
+
+  /* Blueprint dot texture */
+  .dot-grid {
+    background-image: radial-gradient(
+      circle,
+      color-mix(in oklab, var(--color-paper-50) 18%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 32px 32px;
+  }
+
+  /* Marquee */
+  .marquee-track {
+    animation: marquee 50s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Water ripple underline for key headings */
+  .ink-link {
+    background-image: linear-gradient(to right, currentColor, currentColor);
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    transition: background-size 400ms var(--ease-editorial);
+  }
+  .ink-link:hover {
+    background-size: 0% 1px;
+  }
+
+  /* Reversed ink-link: grows on hover */
+  .ink-link-grow {
+    background-image: linear-gradient(to right, currentColor, currentColor);
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    transition: background-size 400ms var(--ease-editorial);
+  }
+  .ink-link-grow:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext -layout \"C:/Users/bobiy/Downloads/Lipanda.pdf\" \"C:/Users/bobiy/OneDrive/Documents/GitHub/Lipanda/Lipanda/lipanda-source.txt\")"
+    ]
+  }
+}
